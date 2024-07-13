@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,10 +6,10 @@ namespace TwinMemoryPuzzle.Scripts.Random
 {
     public class CardRandomizerAndPlacer : MonoBehaviour
     {
-        // public GameObject cardPrefab;
-
+        public event Action<List<Card.Card>> OnCardsฺGenerationFinish;
         public void RandomizeAndPlace(List<Card.Card> cards, GameObject[][] slots)
         {
+            List<Card.Card> cardsInScene =  new List<Card.Card>();
             List<GameObject> availableSlots=new List<GameObject>();
             // Fill the availableSlots list with all slots.
             for(int i=0;i<slots.Length;i++)
@@ -32,7 +33,7 @@ namespace TwinMemoryPuzzle.Scripts.Random
                 for(int i=0;i<2;i++)
                 {
                     GameObject cardInstance=Instantiate(card.cardBackground);
-                    cardInstance.GetComponent<Card.Card>().ID =card.ID;
+                    cardInstance.GetComponent<Card.Card>().ID = card.ID;
                 
                     // Choose a random slot for placement.
                     int randomSlotIndex= UnityEngine.Random.Range(0,availableSlots.Count);
@@ -42,8 +43,13 @@ namespace TwinMemoryPuzzle.Scripts.Random
 
                     // Remove the slot from availableSlots, so it can't be used again.
                     availableSlots.RemoveAt(randomSlotIndex);
+                    
+                    //Add CardInScene
+                    cardsInScene.Add(cardInstance.GetComponent<Card.Card>());
                 }
-            }     
+            } 
+            OnCardsฺGenerationFinish?.Invoke(cardsInScene);
         }
+        
     }
 }

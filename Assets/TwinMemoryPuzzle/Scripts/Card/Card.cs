@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using TwinMemoryPuzzle.Scripts.Logic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,11 +16,26 @@ namespace TwinMemoryPuzzle.Scripts.Card
         bool Compare(ICard otherCard);
     }
 
-    public class Card : MonoBehaviour, ICard, IPointerClickHandler
+    public class Card : MonoBehaviour, ICard, ICardActionBroadcaster , IPointerClickHandler
     {
         [SerializeField] private Image cardImage;
         public GameObject cardBackground;
         [SerializeField] private int id;
+        
+        [SerializeField]
+        private List<ICardObserver> _observers = new List<ICardObserver>();
+
+        private List<ICardObserver> cardObservers = new List<ICardObserver>();
+
+        private void Start()
+        {
+            if (_observers == null)
+            {
+                Debug.Log("_observers is null");
+                _observers = new List<ICardObserver>();
+                Debug.Log(_observers.Count);
+            }
+        }
 
         public int ID
         {
@@ -43,18 +61,40 @@ namespace TwinMemoryPuzzle.Scripts.Card
         {
             cardImage.sprite = Image;
             Debug.Log($"Show card: {ID}");
-            cardBackground.SetActive(false);
+            NotifyCardObserversOfAction();
+            // cardBackground.SetActive(false);
         }
 
         public void HideCard()
         {
-            cardBackground.SetActive(true);
+            NotifyCardObserversOfAction();
+            // cardBackground.SetActive(true);
         }
 
         public bool Compare(ICard otherCard)
         {
             // Specifically, using object/memory reference which will be unique for each card.
             return this == otherCard;
+        }
+
+        public void RegisterCardObserver(ICardObserver observer)
+        {
+            _observers?.Add(observer);
+        }
+
+        public void RemoveCardObserver(ICardObserver observer)
+        {
+            _observers?.Remove(observer);
+        }
+        
+
+        public void NotifyCardObserversOfAction()
+        {
+            foreach (ICardObserver observer in _observers)
+            {
+                observer?.OnCardActionOccurred();
+                observer?.UpdateCardStatus(this);
+            }
         }
     }
 }
