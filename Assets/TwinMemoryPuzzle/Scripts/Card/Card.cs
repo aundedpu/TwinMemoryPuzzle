@@ -18,11 +18,16 @@ namespace TwinMemoryPuzzle.Scripts.Card
         [SerializeField] private Image cardImage;
         public GameObject cardBackground;
         [SerializeField] private int id;
-        
-        public int ID { get; set; }
+
+        public int ID
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
         public Sprite Image { get; set; }
         public bool IsMatched { get; set; }
-        
+
         public Card(Sprite cardImage)
         {
             this.Image = cardImage;
@@ -37,9 +42,10 @@ namespace TwinMemoryPuzzle.Scripts.Card
         public void ShowCard()
         {
             cardImage.sprite = Image;
+            Debug.Log($"Show card: {ID}");
             cardBackground.SetActive(false);
         }
-    
+
         public void HideCard()
         {
             cardBackground.SetActive(true);
