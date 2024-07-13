@@ -5,8 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
-  m_configObjects:
-    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 81b3f53ee557448879478cc513960105, type: 2}
+  - enabled: 1
+    path: Assets/TwinMemoryPuzzle/Scene/MacthCardGame.unity
+    guid: d3c5dab1bd47c4aed8c5abf5e7cc9eea
+  m_configObjects: {}
