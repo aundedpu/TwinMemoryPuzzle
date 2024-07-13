@@ -398,7 +398,6 @@ GameObject:
   - component: {fileID: 1635724785}
   - component: {fileID: 1635724784}
   - component: {fileID: 1635724787}
-  - component: {fileID: 1635724788}
   m_Layer: 5
   m_Name: GridLayout
   m_TagString: Untagged
@@ -502,22 +501,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 1
---- !u!114 &1635724788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635724782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd8cbfaf7ca44f5c80bd0baa10cefd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotPrefab: {fileID: 2647300345841180102, guid: eeb1bf82d681944cda75198bbb92c89c, type: 3}
-  rows: 5
-  cols: 6
-  gridLayoutPanel: {fileID: 1635724784}
 --- !u!1 &1829920746
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,8 +656,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1883934769}
   - component: {fileID: 1883934770}
+  - component: {fileID: 1883934771}
+  - component: {fileID: 1883934772}
   m_Layer: 0
-  m_Name: GridGenerator
+  m_Name: LevelSetup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -688,7 +673,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883934768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1199.5018, y: 248.60677, z: -15.73874}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -704,12 +689,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 1883934768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7816a1752b62749e093b527b41014dcb, type: 3}
+  m_Script: {fileID: 11500000, guid: 0bd8cbfaf7ca44f5c80bd0baa10cefd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotPrefab: {fileID: 0}
-  parent: {fileID: 0}
-  rows: 0
-  cols: 0
-  spaceX: 2
-  spaceY: 2
+  slotPrefab: {fileID: 2647300345841180102, guid: eeb1bf82d681944cda75198bbb92c89c, type: 3}
+  gridLayoutPanel: {fileID: 1635724784}
+--- !u!114 &1883934771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883934768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a1e5a5383854114804bf568c78ef22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1883934772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883934768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09e8a57c407e4fe299f85b7b5a824fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridLayoutSpawner: {fileID: 1883934770}
+  cardRandomizerAndPlacer: {fileID: 1883934771}
+  rows: 3
+  cols: 4
+  cards:
+  - {fileID: 3085129681120615660, guid: 37f155cdebeac43a8b766566e244122e, type: 3}
+  - {fileID: 5839951490309430751, guid: 33161e5e323a6498f8a1d5b837e60eeb, type: 3}

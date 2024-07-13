@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-namespace TwinMemoryPuzzle
+using UnityEngine.UI;
+
+namespace TwinMemoryPuzzle.Scripts.Card
 {
     public interface ICard
     {
@@ -17,10 +16,13 @@ namespace TwinMemoryPuzzle
     public class Card : MonoBehaviour, ICard, IPointerClickHandler
     {
         [SerializeField] private Image cardImage;
-        [SerializeField] private GameObject cardBack;
+        public GameObject cardBackground;
+        [SerializeField] private int id;
+        
+        public int ID { get; set; }
         public Sprite Image { get; set; }
         public bool IsMatched { get; set; }
-
+        
         public Card(Sprite cardImage)
         {
             this.Image = cardImage;
@@ -35,12 +37,12 @@ namespace TwinMemoryPuzzle
         public void ShowCard()
         {
             cardImage.sprite = Image;
-            cardBack.SetActive(false);
+            cardBackground.SetActive(false);
         }
     
         public void HideCard()
         {
-            cardBack.SetActive(true);
+            cardBackground.SetActive(true);
         }
 
         public bool Compare(ICard otherCard)
