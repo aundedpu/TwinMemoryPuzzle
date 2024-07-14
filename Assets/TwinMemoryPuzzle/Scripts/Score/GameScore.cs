@@ -25,6 +25,9 @@ namespace TwinMemoryPuzzle.Scripts.Score
         [SerializeField] private int matchIncrement;
         [SerializeField] private int turnIncrement;
         
+        public Action<int> OnScoresUpdated;
+        public Action<int> OnMatchUpdated;
+        public Action<int> OnTurnsUpdated;
         void Start()
         {
             scoreUpdater = GetComponent<ScoreUpdater>();
@@ -43,14 +46,17 @@ namespace TwinMemoryPuzzle.Scripts.Score
         private void GetUpdateTurnScore()
         {
              Debug.Log($"turn : {turnUpdater.Point} ");  
+             OnTurnsUpdated?.Invoke(turnUpdater.Point);
         }
         private void GetUpdateMatchScore()
         {
             Debug.Log($"match : {matchUpdater.Point} ");  
+            OnMatchUpdated?.Invoke(matchUpdater.Point);
         }
         private void GetUpdateScore()
         {
             Debug.Log($"score : {scoreUpdater.Point} ");  
+            OnScoresUpdated?.Invoke(scoreUpdater.Point);
         }
 
         private void ScoreUpdater() => scoreUpdater.UpdatePoint(scoreIncrement);
