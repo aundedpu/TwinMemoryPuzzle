@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using TwinMemoryPuzzle.Scripts.Constant;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,8 +13,7 @@ namespace TwinMemoryPuzzle.Scripts.Utility
 
         private void Start()
         {
-            DontDestroyOnLoad(this);
-            LoadSceneWithFade(1);
+            LoadSceneWithFade(GlobalConstant.INDEX_CURRENT_SCENE);
         }
         public void LoadSceneWithFade(int sceneIndex)
         {

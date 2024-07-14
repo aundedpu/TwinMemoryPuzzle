@@ -28,7 +28,6 @@ namespace TwinMemoryPuzzle.Scripts.State
         void Start()
         {
             instance = this;
-            SetState(new IntroState());
         }
         public void SetState(IGameState state)
         {
@@ -46,7 +45,7 @@ namespace TwinMemoryPuzzle.Scripts.State
         {
             Debug.Log("Entering Intro State");
             // Wait for 3 seconds before starting the game
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             Debug.Log("Intro State Finished");
             GameState.instance.SetState(new GamePreState());
         }
@@ -57,12 +56,10 @@ namespace TwinMemoryPuzzle.Scripts.State
         public IEnumerator Start()
         {
             Debug.Log("Pre Gameplay State");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             GameState.instance.SetState(new GamePlayState());
         }
     }
-    
-    
     public class GamePlayState : IGameState
     {
         public IEnumerator Start()

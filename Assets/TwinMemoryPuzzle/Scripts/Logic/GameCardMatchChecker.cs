@@ -84,8 +84,8 @@ namespace TwinMemoryPuzzle.Scripts.Logic
                 OnMatchComplete?.Invoke();
                 OnScoreUpdate?.Invoke();
                 DelayedInvoker.InvokeAfterDelay(.25f, () => {
-                    selectedCards[0].HideCard();
-                    selectedCards[1].HideCard();
+                    selectedCards[0].MatchComplete();
+                    selectedCards[1].MatchComplete();
                     selectedCards.Clear();
                 });
             }

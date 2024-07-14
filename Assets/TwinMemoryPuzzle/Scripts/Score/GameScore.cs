@@ -1,4 +1,5 @@
 using System;
+using TwinMemoryPuzzle.Scripts.GameData;
 using TwinMemoryPuzzle.Scripts.Logic;
 using UnityEngine;
 
@@ -28,6 +29,8 @@ namespace TwinMemoryPuzzle.Scripts.Score
         public Action<int> OnScoresUpdated;
         public Action<int> OnMatchUpdated;
         public Action<int> OnTurnsUpdated;
+        
+        [SerializeField] private GameCardSaveLoadData gameCardSaveLoadData;
         void Start()
         {
             scoreUpdater = GetComponent<ScoreUpdater>();
@@ -41,8 +44,8 @@ namespace TwinMemoryPuzzle.Scripts.Score
             scoreUpdater.OnUpdate += GetUpdateScore;
             matchUpdater.OnUpdate += GetUpdateMatchScore;
             turnUpdater.OnUpdate  += GetUpdateTurnScore;
+            gameCardSaveLoadData.OnGameSavedDataEventHandler += HandleGameSaved;
         }
-
         private void GetUpdateTurnScore()
         {
              Debug.Log($"turn : {turnUpdater.Point} ");  
@@ -57,6 +60,12 @@ namespace TwinMemoryPuzzle.Scripts.Score
         {
             Debug.Log($"score : {scoreUpdater.Point} ");  
             OnScoresUpdated?.Invoke(scoreUpdater.Point);
+        }
+        private void HandleGameSaved(object _sender, SaveGameEventArgs _e)
+        {
+            _e.GameSavedData.Score = scoreUpdater.Point;
+            _e.GameSavedData.TurnScore = turnUpdater.Point;
+            _e.GameSavedData.MatchScore = matchUpdater.Point;
         }
 
         private void ScoreUpdater() => scoreUpdater.UpdatePoint(scoreIncrement);
