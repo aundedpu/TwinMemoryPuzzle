@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TwinMemoryPuzzle.Scripts.Random;
+using TwinMemoryPuzzle.Scripts.State;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -29,8 +30,25 @@ namespace TwinMemoryPuzzle.Scripts.Level
             
             var slots = gridLayoutSpawner.SpawnerGridSlot(rows,cols);
             cardRandomizerAndPlacer.RandomizeAndPlace(cardsPrefabs,slots);
+            GameEventState.Instance.OnStateChanged += HandleOnStateChanged;
         }
-        
+
+        private void HandleOnStateChanged(IGameState IgameState)
+        {
+            if (IgameState is GamePreState)
+            {
+                foreach (var card in cardsInScene)
+                {
+                    card.CloseCard();
+                }
+            }   
+        }
+
+        private void OnDestroy()
+        {
+            GameEventState.Instance.OnStateChanged -= HandleOnStateChanged;
+        }
+
         public List<Card.Card> GetCardsInScene() => cardsInScene;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TwinMemoryPuzzle.Scripts.Level;
 using TwinMemoryPuzzle.Scripts.State;
+using TwinMemoryPuzzle.Utility;
 using UnityEngine;
 
 namespace TwinMemoryPuzzle.Scripts.Logic
@@ -42,19 +43,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
                 }
             }
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                foreach (Card.Card card in levelSetup.GetCardsInScene())
-                {
-                    card.RegisterCardObserver(this);
-                }
-            }
-        }
-
+        
         public void OnCardActionOccurred()
         {
             
@@ -62,6 +51,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
 
         public void UpdateCardStatus(Card.Card card)
         {
+            if (GameState.instance.GetState() is not GamePlayState) return;
             Debug.Log($"card id {card.ID}");
             CardWasSelected(card);
         }
@@ -74,7 +64,6 @@ namespace TwinMemoryPuzzle.Scripts.Logic
             if(selectedCards.Count == 2)
             {
                 CheckMatch();
-                selectedCards.Clear();
             }
         }
 
@@ -83,11 +72,19 @@ namespace TwinMemoryPuzzle.Scripts.Logic
             if(selectedCards[0].ID == selectedCards[1].ID)
             {
                 Debug.Log("Cards Match!");
+                selectedCards[0].HideCard();
+                selectedCards[1].HideCard();
                 selectedCards.Clear();
             }
             else
             {
                 Debug.Log("Not Cards Match!");
+                DelayedInvoker.InvokeAfterDelay(.25f, () => {
+                    selectedCards[0].CloseCard();
+                    selectedCards[1].CloseCard();
+                    selectedCards.Clear();
+                });
+                
             }
         }
 

@@ -32,7 +32,7 @@ namespace TwinMemoryPuzzle.Scripts.Random
                 // Place two instances of the card in random slots.
                 for(int i=0;i<2;i++)
                 {
-                    GameObject cardInstance=Instantiate(card.cardBackground);
+                    GameObject cardInstance=Instantiate(card.cardGoPrefabs);
                     cardInstance.GetComponent<Card.Card>().ID = card.ID;
                 
                     // Choose a random slot for placement.
