@@ -21,5 +21,10 @@ namespace TwinMemoryPuzzle.Scripts.Logic
             Debug.Log($"Start");
         }
         
+        public Button ButtonStart { 
+            get => buttonStart;
+            set => buttonStart = value;
+        }
+        
     }
 }

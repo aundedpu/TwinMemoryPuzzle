@@ -826,7 +826,6 @@ Transform:
   - {fileID: 877170445}
   - {fileID: 1483825774}
   - {fileID: 1737140456}
-  - {fileID: 1916690689}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -884,7 +883,6 @@ MonoBehaviour:
   scoreIncrement: 10
   matchIncrement: 1
   turnIncrement: 1
-  gameCardSaveLoadData: {fileID: 1916690690}
 --- !u!114 &877170447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,6 +1090,7 @@ GameObject:
   - component: {fileID: 1341459918}
   - component: {fileID: 1341459921}
   - component: {fileID: 1341459922}
+  - component: {fileID: 1341459923}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1164,6 +1163,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonStart: {fileID: 548776789}
+--- !u!114 &1341459923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341459917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f4bc2a84415418396dadaae77faaaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startGameButton: {fileID: 1341459922}
+  levelsetup: {fileID: 1883934772}
 --- !u!1 &1480070597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,6 +1705,74 @@ MonoBehaviour:
   scoreText: {fileID: 941741950}
   matchText: {fileID: 358234251}
   turnText: {fileID: 205397369}
+--- !u!1 &1757859325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1757859328}
+  - component: {fileID: 1757859327}
+  - component: {fileID: 1757859326}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1757859326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757859325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1757859327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757859325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1757859328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757859325}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1829920746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,6 +2016,7 @@ GameObject:
   - component: {fileID: 1883934770}
   - component: {fileID: 1883934771}
   - component: {fileID: 1883934772}
+  - component: {fileID: 1883934773}
   m_Layer: 0
   m_Name: GameLevelSetup
   m_TagString: Untagged
@@ -2002,48 +2084,21 @@ MonoBehaviour:
   cardsPrefabs:
   - {fileID: 3085129681120615660, guid: 37f155cdebeac43a8b766566e244122e, type: 3}
   - {fileID: 5839951490309430751, guid: 33161e5e323a6498f8a1d5b837e60eeb, type: 3}
-  gameCardSaveLoadData: {fileID: 1916690690}
---- !u!1 &1916690688
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1916690689}
-  - component: {fileID: 1916690690}
-  m_Layer: 0
-  m_Name: GameSaveLoad
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1916690689
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1916690688}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 717720255}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1916690690
+  loadLevelSetup: {fileID: 1883934773}
+--- !u!114 &1883934773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1916690688}
+  m_GameObject: {fileID: 1883934768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b66d428b02e4217a563068824dd755, type: 3}
+  m_Script: {fileID: 11500000, guid: c4ccc0972dd7b4a68928b0d77a5c6ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardsPrefab:
+  - {fileID: 3085129681120615660, guid: 37f155cdebeac43a8b766566e244122e, type: 3}
+  - {fileID: 5839951490309430751, guid: 33161e5e323a6498f8a1d5b837e60eeb, type: 3}
+  - {fileID: 5839951490309430751, guid: 990cf9dcc9a7b4138885b065bd9bfdfa, type: 3}
+  - {fileID: 5839951490309430751, guid: 7ebd9144f827f48b892d1a48e56fe496, type: 3}

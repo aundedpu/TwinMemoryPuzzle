@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TwinMemoryPuzzle.Scripts.Constant;
 using UnityEngine;
@@ -10,10 +11,16 @@ namespace TwinMemoryPuzzle.Scripts.Utility
         [SerializeField] private Animator fadeAnimator;
         //Fade time
         private static float fadeTime = 2f;
+        public static SceneLoader instance;
+        void Awake()
+        {
+            instance = this;
+        }
 
         private void Start()
         {
-            LoadSceneWithFade(GlobalConstant.INDEX_CURRENT_SCENE);
+            DontDestroyOnLoad(this);
+            LoadSceneWithFade(GlobalConstant.INDEX_SAVELOAD_SCENE);
         }
         public void LoadSceneWithFade(int sceneIndex)
         {
@@ -28,7 +35,7 @@ namespace TwinMemoryPuzzle.Scripts.Utility
             yield return new WaitForSeconds(fadeTime);
 
             // Start loading the scene
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex);
 
             // Wait until the async scene fully loads
             while (!asyncLoad.isDone)
