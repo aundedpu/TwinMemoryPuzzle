@@ -20,12 +20,18 @@ namespace TwinMemoryPuzzle.Scripts.Logic
         void NotifyCardObserversOfAction();
     }
     public delegate void CardSelected(Card.Card selectedCard);
+    public delegate void ScoreUpdate();
+    public delegate void MatchComplete();
+    public delegate void TurnUpdate();
     public class GameCardMatchChecker : MonoBehaviour, ICardObserver
     {
         [SerializeField] private LevelSetup levelSetup;
         
         private List<Card.Card> selectedCards  = new List<Card.Card>();
         public event CardSelected OnCardSelected;
+        public event ScoreUpdate OnScoreUpdate;
+        public event MatchComplete OnMatchComplete;
+        public event TurnUpdate OnTurnUpdate;
         
         // Start is called before the first frame update
         void Start()
@@ -58,12 +64,15 @@ namespace TwinMemoryPuzzle.Scripts.Logic
         
         private void CardWasSelected(Card.Card selectedCard)
         {
+            if(selectedCards.Count > 2) return;
+            
             OnCardSelected?.Invoke(selectedCard);
             selectedCards.Add(selectedCard);
             
             if(selectedCards.Count == 2)
             {
                 CheckMatch();
+                OnTurnUpdate?.Invoke();
             }
         }
 
@@ -72,9 +81,13 @@ namespace TwinMemoryPuzzle.Scripts.Logic
             if(selectedCards[0].ID == selectedCards[1].ID)
             {
                 Debug.Log("Cards Match!");
-                selectedCards[0].HideCard();
-                selectedCards[1].HideCard();
-                selectedCards.Clear();
+                OnMatchComplete?.Invoke();
+                OnScoreUpdate?.Invoke();
+                DelayedInvoker.InvokeAfterDelay(.25f, () => {
+                    selectedCards[0].HideCard();
+                    selectedCards[1].HideCard();
+                    selectedCards.Clear();
+                });
             }
             else
             {
