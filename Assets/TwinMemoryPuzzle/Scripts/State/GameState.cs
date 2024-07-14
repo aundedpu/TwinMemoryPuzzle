@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
-using TwinMemoryPuzzle.Scripts.Controller;
 using UnityEngine;
 
 namespace TwinMemoryPuzzle.Scripts.State
 {
-    public class GameStateManager
+    public class GameEventState
     {
-        public static GameStateManager Instance { get; } = new GameStateManager();
+        public static GameEventState Instance { get; } = new GameEventState();
 
         public event Action<IGameState> OnStateChanged;
 
@@ -23,7 +22,22 @@ namespace TwinMemoryPuzzle.Scripts.State
     
     public class GameState : MonoBehaviour
     {
+        public static GameState instance;
+        private IGameState currentState;
         
+        void Start()
+        {
+            instance = this;
+            SetState(new IntroState());
+        }
+        public void SetState(IGameState state)
+        {
+            currentState = state;
+            StartCoroutine(currentState.Start());
+            GameEventState.Instance.ChangeState(currentState);
+        }
+        public IGameState GetState() => currentState;
+
     }
 
     public class IntroState : IGameState
@@ -34,7 +48,7 @@ namespace TwinMemoryPuzzle.Scripts.State
             // Wait for 3 seconds before starting the game
             yield return new WaitForSeconds(3f);
             Debug.Log("Intro State Finished");
-            GameController.instance.SetState(new GamePreState());
+            GameState.instance.SetState(new GamePreState());
         }
     }
     
@@ -43,8 +57,8 @@ namespace TwinMemoryPuzzle.Scripts.State
         public IEnumerator Start()
         {
             Debug.Log("Pre Gameplay State");
-            yield return new WaitForSeconds(1f);
-            GameController.instance.SetState(new GamePlayState());
+            yield return new WaitForSeconds(2f);
+            GameState.instance.SetState(new GamePlayState());
         }
     }
     

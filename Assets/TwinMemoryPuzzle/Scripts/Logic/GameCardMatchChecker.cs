@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TwinMemoryPuzzle.Scripts.Level;
 using TwinMemoryPuzzle.Scripts.State;
 using UnityEngine;
@@ -17,13 +18,18 @@ namespace TwinMemoryPuzzle.Scripts.Logic
         void RemoveCardObserver(ICardObserver observer);
         void NotifyCardObserversOfAction();
     }
+    public delegate void CardSelected(Card.Card selectedCard);
     public class GameCardMatchChecker : MonoBehaviour, ICardObserver
     {
         [SerializeField] private LevelSetup levelSetup;
+        
+        private List<Card.Card> selectedCards  = new List<Card.Card>();
+        public event CardSelected OnCardSelected;
+        
         // Start is called before the first frame update
         void Start()
         {
-            GameStateManager.Instance.OnStateChanged += HandleOnStateChanged;
+            GameEventState.Instance.OnStateChanged += HandleOnStateChanged;
         }
 
         private void HandleOnStateChanged(IGameState state)
@@ -57,11 +63,37 @@ namespace TwinMemoryPuzzle.Scripts.Logic
         public void UpdateCardStatus(Card.Card card)
         {
             Debug.Log($"card id {card.ID}");
+            CardWasSelected(card);
         }
         
+        private void CardWasSelected(Card.Card selectedCard)
+        {
+            OnCardSelected?.Invoke(selectedCard);
+            selectedCards.Add(selectedCard);
+            
+            if(selectedCards.Count == 2)
+            {
+                CheckMatch();
+                selectedCards.Clear();
+            }
+        }
+
+        private void CheckMatch()
+        {
+            if(selectedCards[0].ID == selectedCards[1].ID)
+            {
+                Debug.Log("Cards Match!");
+                selectedCards.Clear();
+            }
+            else
+            {
+                Debug.Log("Not Cards Match!");
+            }
+        }
+
         void OnDestroy()
         {
-            GameStateManager.Instance.OnStateChanged -= HandleOnStateChanged;
+            GameEventState.Instance.OnStateChanged -= HandleOnStateChanged;
         }
     }
 }
