@@ -1,32 +1,47 @@
+using System;
+using System.Collections.Generic;
+using TwinMemoryPuzzle.Scripts.Logic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace TwinMemoryPuzzle.Scripts.Card
 {
     public interface ICard
     {
-        bool IsMatched { get; set; }
         Sprite Image { get; set; }
         void ShowCard();
+        void CloseCard();
         void HideCard();
-        bool Compare(ICard otherCard);
+        
     }
 
-    public class Card : MonoBehaviour, ICard, IPointerClickHandler
+    public class Card : MonoBehaviour, ICard, ICardActionBroadcaster , IPointerClickHandler
     {
         [SerializeField] private Image cardImage;
-        public GameObject cardBackground;
+        public GameObject cardGoPrefabs;
+        [SerializeField] private GameObject hideCardBackground;
         [SerializeField] private int id;
-
+        
+        [SerializeField]
+        private List<ICardObserver> _observers = new List<ICardObserver>();
+        private List<ICardObserver> cardObservers = new List<ICardObserver>();
+        private void Start()
+        {
+            if (_observers == null)
+            {
+                Debug.Log("_observers is null");
+                _observers = new List<ICardObserver>();
+                Debug.Log(_observers.Count);
+            }
+        }
         public int ID
         {
-            get { return id; }
-            set { id = value; }
+            get => id;
+            set => id = value;
         }
-
         public Sprite Image { get; set; }
-        public bool IsMatched { get; set; }
 
         public Card(Sprite cardImage)
         {
@@ -38,23 +53,32 @@ namespace TwinMemoryPuzzle.Scripts.Card
         {
             ShowCard();
         }
-
         public void ShowCard()
         {
-            cardImage.sprite = Image;
-            Debug.Log($"Show card: {ID}");
-            cardBackground.SetActive(false);
+            NotifyCardObserversOfAction();
+            hideCardBackground.SetActive(false);
         }
 
+        public void CloseCard()
+        {
+            hideCardBackground.SetActive(true);
+        }
+        
         public void HideCard()
         {
-            cardBackground.SetActive(true);
+            gameObject.SetActive(false);
         }
+        public void RegisterCardObserver(ICardObserver observer) => _observers?.Add(observer);
 
-        public bool Compare(ICard otherCard)
+        public void RemoveCardObserver(ICardObserver observer) => _observers?.Remove(observer);
+
+        public void NotifyCardObserversOfAction()
         {
-            // Specifically, using object/memory reference which will be unique for each card.
-            return this == otherCard;
+            foreach (ICardObserver observer in _observers)
+            {
+                observer?.OnCardActionOccurred();
+                observer?.UpdateCardStatus(this);
+            }
         }
     }
 }
