@@ -1,3 +1,4 @@
+using TwinMemoryPuzzle.Scripts.Audio;
 using TwinMemoryPuzzle.Scripts.State;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
         }
         private void StartGame()
         {
+            AudioManager.instance.PlayFxSound(0);
             buttonStart.gameObject.SetActive(false);
             GameState.instance.SetState(new IntroState());    
             Debug.Log($"Start");

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TwinMemoryPuzzle.Scripts.Audio;
 using TwinMemoryPuzzle.Scripts.Logic;
 using TwinMemoryPuzzle.Scripts.State;
 using TwinMemoryPuzzle.Utility;
@@ -59,6 +60,7 @@ namespace TwinMemoryPuzzle.Scripts.Card
         // This method gets automatically called when the card is clicked.
         public void OnPointerClick(PointerEventData eventData)
         {
+            AudioManager.instance.PlayFxSound(0);
             ShowCard();
         }
         public void ShowCard()

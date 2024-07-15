@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TwinMemoryPuzzle.Scripts.Audio;
 using TwinMemoryPuzzle.Scripts.Level;
 using TwinMemoryPuzzle.Scripts.Score;
 using TwinMemoryPuzzle.Scripts.State;
@@ -90,6 +91,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
             if(selectedCards[0].ID == selectedCards[1].ID)
             {
                 Debug.Log("Cards Match!");
+                AudioManager.instance.PlayFxSound(1);
                 OnMatchComplete?.Invoke();
                 OnScoreUpdate?.Invoke();
                 DelayedInvoker.InvokeAfterDelay(.25f, () => {

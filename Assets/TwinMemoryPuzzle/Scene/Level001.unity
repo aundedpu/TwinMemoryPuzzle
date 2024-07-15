@@ -2845,8 +2845,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridLayoutSpawner: {fileID: 1883934770}
   cardRandomizerAndPlacer: {fileID: 1883934771}
-  rows: 4
-  cols: 5
+  rows: 2
+  cols: 2
   cardsPrefabs:
   - {fileID: 3085129681120615660, guid: 37f155cdebeac43a8b766566e244122e, type: 3}
   - {fileID: 5839951490309430751, guid: 33161e5e323a6498f8a1d5b837e60eeb, type: 3}

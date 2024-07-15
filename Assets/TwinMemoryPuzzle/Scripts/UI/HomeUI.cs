@@ -1,4 +1,5 @@
 
+using TwinMemoryPuzzle.Scripts.Audio;
 using TwinMemoryPuzzle.Scripts.Constant;
 using TwinMemoryPuzzle.Scripts.GameData;
 using TwinMemoryPuzzle.Scripts.Utility;
@@ -13,16 +14,19 @@ namespace TwinMemoryPuzzle.Scripts.UI
         
         public void LoadSceneHome()
         {
+            AudioManager.instance.PlayFxSound(0);
             GameCardSaveLoadData.instance.SaveGame(new GameData.GameData());
             SceneLoader.instance.LoadSceneWithFade(GlobalConstant.INDEX_SAVELOAD_SCENE);
         }
         public void ShowPopup()
         {
+            AudioManager.instance.PlayFxSound(0);
             popupImage.gameObject.SetActive(true);
         }
 
         public void HidePopup()
         {
+            AudioManager.instance.PlayFxSound(0);
             popupImage.gameObject.SetActive(false);
         }
     }
