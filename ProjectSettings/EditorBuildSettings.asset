@@ -17,4 +17,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TwinMemoryPuzzle/Scene/Level002.unity
     guid: 4233a10f1f50e418099eccf9c1f488c8
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/TwinMemoryPuzzle/Scene/Level003.unity
+    guid: bebeac5669fa44a708d104ac10641d58
+  - enabled: 1
+    path: Assets/TwinMemoryPuzzle/Scene/Level004.unity
+    guid: d15e50519b88046ab83e8b90d2ed15a4
+  - enabled: 1
+    path: Assets/TwinMemoryPuzzle/Scene/Level005.unity
+    guid: 73ad777ce66254dcfab4bc356d23554c
+  - enabled: 1
+    path: Assets/TwinMemoryPuzzle/Scene/Level006.unity
+    guid: 38d833ecece4a45f18d871ba9001cb81
+  - enabled: 1
+    path: Assets/TwinMemoryPuzzle/Scene/Level007.unity
+    guid: a70392d58cd7e47f491fb711e6f1f92a
+  - enabled: 1
+    path: Assets/TwinMemoryPuzzle/Scene/Level008.unity
+    guid: 3522f33d4d0804f0285d0bf3d198b861
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 51baaea2db81a470f953f4e5024fcfdd, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 22e2743fd0aff45729b27a6b85f6aed6, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 81b3f53ee557448879478cc513960105, type: 2}

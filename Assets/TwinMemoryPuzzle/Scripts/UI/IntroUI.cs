@@ -1,6 +1,8 @@
 using System;
+using System.IO;
 using TwinMemoryPuzzle.Scripts.Audio;
 using TwinMemoryPuzzle.Scripts.Constant;
+using TwinMemoryPuzzle.Scripts.GameData;
 using TwinMemoryPuzzle.Scripts.Logic;
 using TwinMemoryPuzzle.Scripts.Utility;
 using UnityEngine;
@@ -23,6 +25,10 @@ namespace TwinMemoryPuzzle.Scripts.UI
 
         public void LoadGame()
         {
+            Debug.Log(GameCardSaveLoadData.instance.GetSavingPath(GlobalConstant.FILE_SAVE_GAME_NAME));
+            
+            if (!File.Exists(GameCardSaveLoadData.instance.GetSavingPath(GlobalConstant.FILE_SAVE_GAME_NAME)))return;
+            
             AudioManager.instance.PlayFxSound(0);
             GameMode.CurrentGameMode = GameMode.StartGameMode.LoadGame;
             SceneLoader.instance.LoadSceneWithFade(GlobalConstant.INDEX_CURRENT_SCENE);

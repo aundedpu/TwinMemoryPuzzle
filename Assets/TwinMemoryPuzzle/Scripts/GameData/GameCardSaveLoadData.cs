@@ -55,7 +55,7 @@ namespace TwinMemoryPuzzle.Scripts.GameData
             Debug.Log($"{path}");
         }
 
-        private string GetSavingPath(string filename)
+        public string GetSavingPath(string filename)
         {
             string directory;
 
