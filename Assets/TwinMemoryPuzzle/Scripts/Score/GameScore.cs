@@ -80,7 +80,11 @@ namespace TwinMemoryPuzzle.Scripts.Score
             GameCardSaveLoadData.instance.OnGameSavedDataEventHandler -= HandleGameSaved;
         }
 
-        private void ScoreUpdater() => scoreUpdater.UpdatePoint(scoreIncrement * comboScore.MultiPlyScore);
+        private void ScoreUpdater()
+        {
+            // scoreUpdater.UpdatePoint(scoreIncrement * comboScore.MultiPlyScore);
+            scoreUpdater.AddPoint(scoreIncrement * comboScore.MultiPlyScore);
+        }
 
         private void TurnUpdate() => turnUpdater.UpdatePoint(turnIncrement);
         private void MatchUpdater() => matchUpdater.UpdatePoint(matchIncrement);

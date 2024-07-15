@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TwinMemoryPuzzle.Scripts.Logic;
 using TwinMemoryPuzzle.Scripts.State;
+using TwinMemoryPuzzle.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
@@ -21,6 +22,7 @@ namespace TwinMemoryPuzzle.Scripts.Card
 
     }
     
+    [RequireComponent(typeof(CardAnimation))]
     public class Card : MonoBehaviour, ICard, ICardActionBroadcaster , IPointerClickHandler
     {
         [SerializeField] private Image cardImage;
@@ -31,7 +33,14 @@ namespace TwinMemoryPuzzle.Scripts.Card
         [SerializeField]
         private List<ICardObserver> _observers = new List<ICardObserver>();
         private List<ICardObserver> cardObservers = new List<ICardObserver>();
-        
+
+        [SerializeField] private CardAnimation cardAnimation;
+
+        void Start()
+        {
+            cardAnimation = GetComponent<CardAnimation>();
+        }
+
         public int ID
         {
             get => id;
@@ -60,18 +69,42 @@ namespace TwinMemoryPuzzle.Scripts.Card
                 return;
             IsShow = true;
             NotifyCardObserversOfAction();
-            hideCardBackground.SetActive(false);
+            cardAnimation.CardAnimator.enabled = true;
+            if(cardAnimation)
+                cardAnimation.Show();
+            else
+                hideCardBackground.SetActive(false);
         }
 
         public void CloseCard()
         {
+            cardAnimation.CardAnimator.enabled = true;
             IsShow = false;
+            if (cardAnimation)
+            { 
+                cardAnimation.Hide();
+            }
+        }
+
+        public void ForceCloseCard()
+        {
+            cardAnimation.CardAnimator.enabled = false;
             hideCardBackground.SetActive(true);
+            DelayedInvoker.InvokeAfterDelay(.25f, () => {
+                // cardAnimation.CardAnimator.enabled = true;
+            });
+        }
+        
+        public void ForceHideCard()
+        {
+            gameObject.SetActive(false);
         }
         
         public void HideCard()
         {
-            gameObject.SetActive(false);
+                DelayedInvoker.InvokeAfterDelay(.25f, () => {
+                    gameObject.SetActive(false);
+                });
         }
 
         public void MatchComplete()

@@ -94,6 +94,7 @@ namespace TwinMemoryPuzzle.Scripts.GameData
         public int Score;
         public int MatchScore;
         public int TurnScore;
+        public int MultiplyCombo;
         public List<CardData> CardDatas = new List<CardData>();
     }
     [Serializable]

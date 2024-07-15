@@ -45,9 +45,9 @@ namespace TwinMemoryPuzzle.Scripts.Level
                 if (card.IsShow)
                     card.ShowCard();
                 else
-                    card.CloseCard();
+                    card.ForceCloseCard();
                 if(card.IsMatch)
-                    card.HideCard();
+                    card.ForceHideCard();
                 // Load Card Select
                 if(card.IsShow && !card.IsMatch)
                     gameCardMatchChecker.SelectedCards.Add(card);

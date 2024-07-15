@@ -2282,6 +2282,7 @@ GameObject:
   - component: {fileID: 1737140456}
   - component: {fileID: 1737140457}
   - component: {fileID: 1737140458}
+  - component: {fileID: 1737140459}
   m_Layer: 0
   m_Name: GameUI
   m_TagString: Untagged
@@ -2317,6 +2318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScore: {fileID: 877170446}
+  scoreAnimatorUpdate: {fileID: 0}
   scoreText: {fileID: 941741950}
   matchText: {fileID: 358234251}
   turnText: {fileID: 205397369}
@@ -2333,6 +2335,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupImage: {fileID: 748707341}
+--- !u!114 &1737140459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737140455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbf5416bd7ca494daebdee00ffb139e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationTime: 0.25
 --- !u!1 &1757859325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2835,6 +2850,14 @@ MonoBehaviour:
   cardsPrefabs:
   - {fileID: 3085129681120615660, guid: 37f155cdebeac43a8b766566e244122e, type: 3}
   - {fileID: 5839951490309430751, guid: 33161e5e323a6498f8a1d5b837e60eeb, type: 3}
+  - {fileID: 5839951490309430751, guid: 990cf9dcc9a7b4138885b065bd9bfdfa, type: 3}
+  - {fileID: 5839951490309430751, guid: 7ebd9144f827f48b892d1a48e56fe496, type: 3}
+  - {fileID: 5839951490309430751, guid: 1e62197624f644a1aa9093e6799554f0, type: 3}
+  - {fileID: 5839951490309430751, guid: cea16fe1a4e5d41a5a01624e7c5ab535, type: 3}
+  - {fileID: 5839951490309430751, guid: 6b55ec83aefd04ab5a51c722d3c7ffe3, type: 3}
+  - {fileID: 5839951490309430751, guid: a1c68613f8b7945fdb77a4d8dd87f347, type: 3}
+  - {fileID: 5839951490309430751, guid: 4f6edaf73a5ba4e6eab39685063bf530, type: 3}
+  - {fileID: 5839951490309430751, guid: 00406e9edd64740aba5816ad0b736e82, type: 3}
   loadLevelSetup: {fileID: 1883934773}
 --- !u!114 &1883934773
 MonoBehaviour:
@@ -2855,6 +2878,12 @@ MonoBehaviour:
   - {fileID: 5839951490309430751, guid: 33161e5e323a6498f8a1d5b837e60eeb, type: 3}
   - {fileID: 5839951490309430751, guid: 990cf9dcc9a7b4138885b065bd9bfdfa, type: 3}
   - {fileID: 5839951490309430751, guid: 7ebd9144f827f48b892d1a48e56fe496, type: 3}
+  - {fileID: 5839951490309430751, guid: 1e62197624f644a1aa9093e6799554f0, type: 3}
+  - {fileID: 5839951490309430751, guid: cea16fe1a4e5d41a5a01624e7c5ab535, type: 3}
+  - {fileID: 5839951490309430751, guid: 6b55ec83aefd04ab5a51c722d3c7ffe3, type: 3}
+  - {fileID: 5839951490309430751, guid: a1c68613f8b7945fdb77a4d8dd87f347, type: 3}
+  - {fileID: 5839951490309430751, guid: 4f6edaf73a5ba4e6eab39685063bf530, type: 3}
+  - {fileID: 5839951490309430751, guid: 00406e9edd64740aba5816ad0b736e82, type: 3}
   gameCardMatchChecker: {fileID: 1341459918}
 --- !u!114 &1883934774
 MonoBehaviour:
