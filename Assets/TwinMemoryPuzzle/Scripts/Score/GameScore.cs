@@ -17,6 +17,7 @@ namespace TwinMemoryPuzzle.Scripts.Score
     public class GameScore : MonoBehaviour
     {
         [SerializeField] private GameCardMatchChecker gameCardMatchChecker;
+        [SerializeField] private ComboScore comboScore;
         
         [SerializeField] private ScoreUpdater scoreUpdater;
         [SerializeField] private MatchUpdater matchUpdater;
@@ -40,22 +41,22 @@ namespace TwinMemoryPuzzle.Scripts.Score
             gameCardMatchChecker.OnMatchComplete += MatchUpdater;
             gameCardMatchChecker.OnTurnUpdate += TurnUpdate;
 
-            scoreUpdater.OnUpdate += SetUpdateScore;
-            matchUpdater.OnUpdate += SetUpdateMatchScore;
-            turnUpdater.OnUpdate  += SetUpdateTurnScore;
+            scoreUpdater.OnUpdate += GetUpdateScore;
+            matchUpdater.OnUpdate += GetUpdateMatchScore;
+            turnUpdater.OnUpdate  += GetUpdateTurnScore;
             GameCardSaveLoadData.instance.OnGameSavedDataEventHandler += HandleGameSaved;
         }
-        private void SetUpdateTurnScore()
+        private void GetUpdateTurnScore()
         {
              Debug.Log($"turn : {turnUpdater.Point} ");  
              OnTurnsUpdated?.Invoke(turnUpdater.Point);
         }
-        private void SetUpdateMatchScore()
+        private void GetUpdateMatchScore()
         {
             Debug.Log($"match : {matchUpdater.Point} ");  
             OnMatchUpdated?.Invoke(matchUpdater.Point);
         }
-        private void SetUpdateScore()
+        private void GetUpdateScore()
         {
             Debug.Log($"score : {scoreUpdater.Point} ");  
             OnScoresUpdated?.Invoke(scoreUpdater.Point);
@@ -73,13 +74,14 @@ namespace TwinMemoryPuzzle.Scripts.Score
             gameCardMatchChecker.OnMatchComplete -= MatchUpdater;
             gameCardMatchChecker.OnTurnUpdate -= TurnUpdate;
 
-            scoreUpdater.OnUpdate -= SetUpdateScore;
-            matchUpdater.OnUpdate -= SetUpdateMatchScore;
-            turnUpdater.OnUpdate  -= SetUpdateTurnScore;
+            scoreUpdater.OnUpdate -= GetUpdateScore;
+            matchUpdater.OnUpdate -= GetUpdateMatchScore;
+            turnUpdater.OnUpdate  -= GetUpdateTurnScore;
             GameCardSaveLoadData.instance.OnGameSavedDataEventHandler -= HandleGameSaved;
         }
 
-        private void ScoreUpdater() => scoreUpdater.UpdatePoint(scoreIncrement);
+        private void ScoreUpdater() => scoreUpdater.UpdatePoint(scoreIncrement * comboScore.MultiPlyScore);
+
         private void TurnUpdate() => turnUpdater.UpdatePoint(turnIncrement);
         private void MatchUpdater() => matchUpdater.UpdatePoint(matchIncrement);
         public ScoreUpdater ScoreUpdate

@@ -24,6 +24,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
     public delegate void CardSelected(Card.Card selectedCard);
     public delegate void ScoreUpdate();
     public delegate void MatchComplete();
+    public delegate void MatchFailure ();
     public delegate void TurnUpdate();
     public delegate void CompleteLevel();
     public class GameCardMatchChecker : MonoBehaviour, ICardObserver
@@ -36,6 +37,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
         public event CardSelected OnCardSelected;
         public event ScoreUpdate OnScoreUpdate;
         public event MatchComplete OnMatchComplete;
+        public event MatchFailure OnMatchFailure;
         public event TurnUpdate OnTurnUpdate;
         public event CompleteLevel OnCompleteLevel;
         
@@ -101,12 +103,12 @@ namespace TwinMemoryPuzzle.Scripts.Logic
             else
             {
                 Debug.Log("Not Cards Match!");
+                OnMatchFailure?.Invoke();
                 DelayedInvoker.InvokeAfterDelay(.25f, () => {
                     selectedCards[0].CloseCard();
                     selectedCards[1].CloseCard();
                     selectedCards.Clear();
                 });
-                
             }
         }
 

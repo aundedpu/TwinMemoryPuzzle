@@ -1013,6 +1013,7 @@ GameObject:
   - component: {fileID: 877170449}
   - component: {fileID: 877170448}
   - component: {fileID: 877170447}
+  - component: {fileID: 877170450}
   m_Layer: 0
   m_Name: GameScore
   m_TagString: Untagged
@@ -1048,6 +1049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameCardMatchChecker: {fileID: 1341459918}
+  comboScore: {fileID: 877170450}
   scoreUpdater: {fileID: 0}
   matchUpdater: {fileID: 0}
   turnUpdater: {fileID: 0}
@@ -1090,6 +1092,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ea254fee4ed429480f6b70ca918756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &877170450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877170444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bd5d939d0fa44fd0823624389454811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCardMatchChecker: {fileID: 1341459918}
 --- !u!1 &887196508
 GameObject:
   m_ObjectHideFlags: 0
