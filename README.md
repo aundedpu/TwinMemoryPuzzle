@@ -2,8 +2,12 @@
 
 ## Description
 
-   This project is an experimental test case for exploring and applying design patterns and the SOLID principle design. It was done in a span of two days.
+  This project presents a challenge in game development from set zero, without relying on any template game or assets from store . 
+We are implementing popular design patterns such as State Pattern, Observer Pattern, Factory Pattern, and Message Bus.
 
+Furthermore, we are applying modern software development philosophies like SOLID principles to create an efficient, flexible, and maintainable code structure.
+
+The project is currently in its initial stages of development and will continue to evolve. Our goal is to build a robust foundation for high-quality game development, showcasing best practices and innovative approaches in software architecture.
 
 ## System Requirements
 
