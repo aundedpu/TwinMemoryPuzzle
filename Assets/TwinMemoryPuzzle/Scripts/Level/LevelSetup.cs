@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TwinMemoryPuzzle.Scripts.Constant;
 using TwinMemoryPuzzle.Scripts.GameData;
 using TwinMemoryPuzzle.Scripts.Random;
 using TwinMemoryPuzzle.Scripts.State;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace TwinMemoryPuzzle.Scripts.Level
 {
