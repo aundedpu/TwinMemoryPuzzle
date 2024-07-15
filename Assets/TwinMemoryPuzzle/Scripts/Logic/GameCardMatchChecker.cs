@@ -25,6 +25,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
     public delegate void ScoreUpdate();
     public delegate void MatchComplete();
     public delegate void TurnUpdate();
+    public delegate void CompleteLevel();
     public class GameCardMatchChecker : MonoBehaviour, ICardObserver
     {
         [SerializeField] private LevelSetup levelSetup;
@@ -36,6 +37,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
         public event ScoreUpdate OnScoreUpdate;
         public event MatchComplete OnMatchComplete;
         public event TurnUpdate OnTurnUpdate;
+        public event CompleteLevel OnCompleteLevel;
         
         // Start is called before the first frame update
         void Start()
@@ -116,6 +118,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
                 if (gameScore.MatchScoreUpdater.Point >= allMatchComplete)
                 {
                     GameState.instance.SetState(new GameCompleteState());
+                    OnCompleteLevel?.Invoke();
                 }
             }
             else if (GameMode.CurrentGameMode == GameMode.StartGameMode.LoadGame)
@@ -124,6 +127,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
                 if (gameScore.MatchScoreUpdater.Point >= allMatchComplete)
                 {
                     GameState.instance.SetState(new GameCompleteState());
+                    OnCompleteLevel?.Invoke();
                 }
             }
         }
