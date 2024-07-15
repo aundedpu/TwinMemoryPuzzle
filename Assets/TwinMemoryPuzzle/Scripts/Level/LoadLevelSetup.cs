@@ -21,8 +21,11 @@ namespace TwinMemoryPuzzle.Scripts.Level
         public void LoadGameSetUp()
         {
             GameData.GameData gameData = GameCardSaveLoadData.instance.LoadGame(GlobalConstant.FILE_SAVE_GAME_NAME);
+
+            Rows = gameData.RowGridLayout;
+            Cols = gameData.ColGridLayout;
             
-            var slots = gridLayoutSpawner.SpawnerGridSlot(gameData.RowGridLayout,gameData.ColGridLayout);
+            var slots = gridLayoutSpawner.SpawnerGridSlot(Rows,Cols);
 
             List<Card.Card> cardsInScene = levelSetup.GetCardsInScene();  
             cardsInScene?.Clear();
@@ -57,6 +60,17 @@ namespace TwinMemoryPuzzle.Scripts.Level
             }
             levelSetup.SetCardsInScene(cardsInScene);
             GameState.instance.SetState(new GamePreState());
+        }
+        
+        public int Rows
+        {
+            get ;
+            set ;
+        }
+        public int Cols
+        {
+            get ;
+            set ;
         }
         
     

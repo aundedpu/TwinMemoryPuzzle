@@ -49,8 +49,8 @@ namespace TwinMemoryPuzzle.Scripts.UI
             gameScore.MatchScoreUpdater.Point = _gamedata.MatchScore;
             
             UpdateScoreTextUi(gameScore.ScoreUpdate.Point);
-            UpdateMatchTextUi(gameScore.TurnScoreUpdater.Point);
-            UpdateTurnTextUi(gameScore.MatchScoreUpdater.Point);
+            UpdateMatchTextUi(gameScore.MatchScoreUpdater.Point);
+            UpdateTurnTextUi(gameScore.TurnScoreUpdater.Point);
         }
 
         private void OnDestroy()

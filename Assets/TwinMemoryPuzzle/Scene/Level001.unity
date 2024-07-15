@@ -1497,6 +1497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSetup: {fileID: 1883934772}
+  loadLevelSetup: {fileID: 1883934773}
+  gameScore: {fileID: 877170446}
 --- !u!114 &1341459919
 MonoBehaviour:
   m_ObjectHideFlags: 0

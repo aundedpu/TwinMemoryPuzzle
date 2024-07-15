@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TwinMemoryPuzzle.Scripts.Level;
+using TwinMemoryPuzzle.Scripts.Score;
 using TwinMemoryPuzzle.Scripts.State;
 using TwinMemoryPuzzle.Utility;
 using UnityEngine;
@@ -27,6 +28,8 @@ namespace TwinMemoryPuzzle.Scripts.Logic
     public class GameCardMatchChecker : MonoBehaviour, ICardObserver
     {
         [SerializeField] private LevelSetup levelSetup;
+        [SerializeField] private LoadLevelSetup loadLevelSetup;
+        [SerializeField] private GameScore gameScore; 
         
         private List<Card.Card> selectedCards  = new List<Card.Card>();
         public event CardSelected OnCardSelected;
@@ -90,6 +93,8 @@ namespace TwinMemoryPuzzle.Scripts.Logic
                     selectedCards[1].MatchComplete();
                     selectedCards.Clear();
                 });
+                //Check Complete Game
+                CheckCompleteGame();
             }
             else
             {
@@ -100,6 +105,26 @@ namespace TwinMemoryPuzzle.Scripts.Logic
                     selectedCards.Clear();
                 });
                 
+            }
+        }
+
+        private void CheckCompleteGame()
+        {
+            if (GameMode.CurrentGameMode == GameMode.StartGameMode.NewGame)
+            {
+                int allMatchComplete = ((levelSetup.Rows) * (levelSetup.Cols))/2;
+                if (gameScore.MatchScoreUpdater.Point >= allMatchComplete)
+                {
+                    GameState.instance.SetState(new GameCompleteState());
+                }
+            }
+            else if (GameMode.CurrentGameMode == GameMode.StartGameMode.LoadGame)
+            {
+                int allMatchComplete = ((loadLevelSetup.Rows) * (loadLevelSetup.Cols))/2;
+                if (gameScore.MatchScoreUpdater.Point >= allMatchComplete)
+                {
+                    GameState.instance.SetState(new GameCompleteState());
+                }
             }
         }
 

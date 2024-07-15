@@ -40,22 +40,22 @@ namespace TwinMemoryPuzzle.Scripts.Score
             gameCardMatchChecker.OnMatchComplete += MatchUpdater;
             gameCardMatchChecker.OnTurnUpdate += TurnUpdate;
 
-            scoreUpdater.OnUpdate += GetUpdateScore;
-            matchUpdater.OnUpdate += GetUpdateMatchScore;
-            turnUpdater.OnUpdate  += GetUpdateTurnScore;
+            scoreUpdater.OnUpdate += SetUpdateScore;
+            matchUpdater.OnUpdate += SetUpdateMatchScore;
+            turnUpdater.OnUpdate  += SetUpdateTurnScore;
             GameCardSaveLoadData.instance.OnGameSavedDataEventHandler += HandleGameSaved;
         }
-        private void GetUpdateTurnScore()
+        private void SetUpdateTurnScore()
         {
              Debug.Log($"turn : {turnUpdater.Point} ");  
              OnTurnsUpdated?.Invoke(turnUpdater.Point);
         }
-        private void GetUpdateMatchScore()
+        private void SetUpdateMatchScore()
         {
             Debug.Log($"match : {matchUpdater.Point} ");  
             OnMatchUpdated?.Invoke(matchUpdater.Point);
         }
-        private void GetUpdateScore()
+        private void SetUpdateScore()
         {
             Debug.Log($"score : {scoreUpdater.Point} ");  
             OnScoresUpdated?.Invoke(scoreUpdater.Point);
@@ -73,9 +73,9 @@ namespace TwinMemoryPuzzle.Scripts.Score
             gameCardMatchChecker.OnMatchComplete -= MatchUpdater;
             gameCardMatchChecker.OnTurnUpdate -= TurnUpdate;
 
-            scoreUpdater.OnUpdate -= GetUpdateScore;
-            matchUpdater.OnUpdate -= GetUpdateMatchScore;
-            turnUpdater.OnUpdate  -= GetUpdateTurnScore;
+            scoreUpdater.OnUpdate -= SetUpdateScore;
+            matchUpdater.OnUpdate -= SetUpdateMatchScore;
+            turnUpdater.OnUpdate  -= SetUpdateTurnScore;
             GameCardSaveLoadData.instance.OnGameSavedDataEventHandler -= HandleGameSaved;
         }
 

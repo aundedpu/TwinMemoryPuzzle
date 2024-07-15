@@ -84,5 +84,15 @@ namespace TwinMemoryPuzzle.Scripts.Level
 
         public List<Card.Card> GetCardsInScene() => cardsInScene;
         public void SetCardsInScene(List<Card.Card> cards) => cardsInScene = cards;
+        public int Rows
+        {
+            get => rows;
+            set => rows = value;
+        }
+        public int Cols
+        {
+            get => cols;
+            set => cols = value;
+        }
     }
 }

@@ -68,4 +68,13 @@ namespace TwinMemoryPuzzle.Scripts.State
             yield break;
         }
     }
+    
+    public class GameCompleteState : IGameState
+    {
+        public IEnumerator Start()
+        {
+            Debug.Log("Complete Game");
+            yield break;
+        }
+    }
 }
