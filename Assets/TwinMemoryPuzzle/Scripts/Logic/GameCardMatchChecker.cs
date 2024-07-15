@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TwinMemoryPuzzle.Scripts.Level;
 using TwinMemoryPuzzle.Scripts.State;
@@ -43,6 +44,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
         {
             if (state is GamePreState)
             {
+                Debug.Log("Ready " + levelSetup.GetCardsInScene().Count);
                 foreach (Card.Card card in levelSetup.GetCardsInScene())
                 {
                     card.RegisterCardObserver(this);
@@ -61,7 +63,12 @@ namespace TwinMemoryPuzzle.Scripts.Logic
             Debug.Log($"card id {card.ID}");
             CardWasSelected(card);
         }
-        
+
+        private void Update()
+        {
+            Debug.Log($"Card Was Select : {selectedCards.Count}");
+        }
+
         private void CardWasSelected(Card.Card selectedCard)
         {
             if(selectedCards.Count > 2) return;
@@ -104,6 +111,12 @@ namespace TwinMemoryPuzzle.Scripts.Logic
         void OnDestroy()
         {
             GameEventState.Instance.OnStateChanged -= HandleOnStateChanged;
+        }
+        
+        public List<Card.Card> SelectedCards
+        {
+            get => selectedCards;
+            set => selectedCards = value;
         }
     }
 }

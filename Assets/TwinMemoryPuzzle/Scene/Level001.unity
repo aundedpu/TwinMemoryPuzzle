@@ -1177,6 +1177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGameButton: {fileID: 1341459922}
   levelsetup: {fileID: 1883934772}
+  loadLevelsetup: {fileID: 1883934773}
 --- !u!1 &1480070597
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,8 +2098,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ccc0972dd7b4a68928b0d77a5c6ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelSetup: {fileID: 1883934772}
+  gridLayoutSpawner: {fileID: 1883934770}
   cardsPrefab:
   - {fileID: 3085129681120615660, guid: 37f155cdebeac43a8b766566e244122e, type: 3}
   - {fileID: 5839951490309430751, guid: 33161e5e323a6498f8a1d5b837e60eeb, type: 3}
   - {fileID: 5839951490309430751, guid: 990cf9dcc9a7b4138885b065bd9bfdfa, type: 3}
   - {fileID: 5839951490309430751, guid: 7ebd9144f827f48b892d1a48e56fe496, type: 3}
+  gameCardMatchChecker: {fileID: 1341459918}

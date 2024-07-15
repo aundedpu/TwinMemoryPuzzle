@@ -75,44 +75,7 @@ namespace TwinMemoryPuzzle.Scripts.Level
                 }
             }
         }
-
-        public void LoadGameSetUp()
-        {
-            GameData.GameData gameData = GameCardSaveLoadData.instance.LoadGame(GlobalConstant.FILE_SAVE_GAME_NAME);
-            
-              Slots = gridLayoutSpawner.SpawnerGridSlot(gameData.RowGridLayout,gameData.ColGridLayout);
-             
-             
-             
-             cardsInScene?.Clear();
-             //Load Card
-             for (int i = 0; i < gameData.CardDatas.Count(); i++)
-             {
-                 CardData cardData = gameData.CardDatas[i];
-                 GameObject cardGo =Instantiate(loadLevelSetup.cardsPrefab[cardData.ID-1].cardGoPrefabs);
-                 Card.Card card = cardGo.GetComponent<Card.Card>();
-                 card.ID = cardData.ID;
-                 card.IsShow = cardData.IsShow;
-                 card.IsMatch = cardData.IsMatch;
-                 
-                 GameObject slot = GameObject.Find(cardData.PositionName);
-                 card.transform.SetParent(slot.transform, false);
-                 if(card.IsShow)
-                     card.ShowCard();
-                 else
-                     card.CloseCard();
-                 if(card.IsMatch)
-                     card.HideCard();
-                 if (cardsInScene == null)
-                 {
-                     cardsInScene = new List<Card.Card>();
-                 }
-                 cardsInScene?.Add(card);
-             }
-             
-             
-        }
-
+        
         private void OnDestroy()
         {
             GameEventState.Instance.OnStateChanged -= HandleOnStateChanged;
@@ -120,5 +83,6 @@ namespace TwinMemoryPuzzle.Scripts.Level
         }
 
         public List<Card.Card> GetCardsInScene() => cardsInScene;
+        public void SetCardsInScene(List<Card.Card> cards) => cardsInScene = cards;
     }
 }

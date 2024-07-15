@@ -31,15 +31,7 @@ namespace TwinMemoryPuzzle.Scripts.Card
         [SerializeField]
         private List<ICardObserver> _observers = new List<ICardObserver>();
         private List<ICardObserver> cardObservers = new List<ICardObserver>();
-        private void Start()
-        {
-            if (_observers == null)
-            {
-                Debug.Log("_observers is null");
-                _observers = new List<ICardObserver>();
-                Debug.Log(_observers.Count);
-            }
-        }
+        
         public int ID
         {
             get => id;
@@ -88,7 +80,16 @@ namespace TwinMemoryPuzzle.Scripts.Card
             IsMatch = true;
         }
 
-        public void RegisterCardObserver(ICardObserver observer) => _observers?.Add(observer);
+        public void RegisterCardObserver(ICardObserver observer)
+        {
+            if (_observers == null)
+            {
+                Debug.Log("_observers is null");
+                _observers = new List<ICardObserver>();
+                Debug.Log(_observers.Count);
+            }
+            _observers?.Add(observer);
+        }
 
         public void RemoveCardObserver(ICardObserver observer) => _observers?.Remove(observer);
 

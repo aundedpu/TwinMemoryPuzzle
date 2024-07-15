@@ -8,6 +8,8 @@ namespace TwinMemoryPuzzle.Scripts.Logic
     {
         [SerializeField] private StartGameButton startGameButton;
         [SerializeField] private LevelSetup levelsetup;
+        [SerializeField] private LoadLevelSetup loadLevelsetup;
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -16,7 +18,6 @@ namespace TwinMemoryPuzzle.Scripts.Logic
 
         private void Initializer()
         {
-            
             if (GameMode.CurrentGameMode == GameMode.StartGameMode.NewGame)
             {
                 startGameButton.ButtonStart.gameObject.SetActive(true);   
@@ -24,7 +25,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
             else if (GameMode.CurrentGameMode == GameMode.StartGameMode.LoadGame)
             {
                 startGameButton.ButtonStart.gameObject.SetActive(false);
-                levelsetup.LoadGameSetUp();
+                loadLevelsetup.LoadGameSetUp();
             }
         }
         
