@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TwinMemoryPuzzle.Scripts.Logic;
 using TwinMemoryPuzzle.Scripts.State;
+using TwinMemoryPuzzle.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
@@ -21,6 +22,7 @@ namespace TwinMemoryPuzzle.Scripts.Card
 
     }
     
+    [RequireComponent(typeof(CardAnimation))]
     public class Card : MonoBehaviour, ICard, ICardActionBroadcaster , IPointerClickHandler
     {
         [SerializeField] private Image cardImage;
@@ -31,7 +33,14 @@ namespace TwinMemoryPuzzle.Scripts.Card
         [SerializeField]
         private List<ICardObserver> _observers = new List<ICardObserver>();
         private List<ICardObserver> cardObservers = new List<ICardObserver>();
-        
+
+        private CardAnimation cardAnimation;
+
+        void Start()
+        {
+            cardAnimation = GetComponent<CardAnimation>();
+        }
+
         public int ID
         {
             get => id;
@@ -60,18 +69,22 @@ namespace TwinMemoryPuzzle.Scripts.Card
                 return;
             IsShow = true;
             NotifyCardObserversOfAction();
-            hideCardBackground.SetActive(false);
+            // hideCardBackground.SetActive(false);
+            cardAnimation.Show();
         }
 
         public void CloseCard()
         {
             IsShow = false;
-            hideCardBackground.SetActive(true);
+            // hideCardBackground.SetActive(true);
+            cardAnimation.Hide();
         }
         
         public void HideCard()
         {
-            gameObject.SetActive(false);
+            DelayedInvoker.InvokeAfterDelay(.25f, () => {
+                gameObject.SetActive(false);
+            });
         }
 
         public void MatchComplete()

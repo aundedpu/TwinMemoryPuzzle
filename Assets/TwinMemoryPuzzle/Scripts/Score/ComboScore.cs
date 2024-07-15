@@ -35,7 +35,6 @@ namespace TwinMemoryPuzzle.Scripts.Score
 
         private void IncreaseComboMultiplyScore()
         {
-            Debug.Log("MUlti: " +multiplyScore);
             multiplyScore++;
         }
         

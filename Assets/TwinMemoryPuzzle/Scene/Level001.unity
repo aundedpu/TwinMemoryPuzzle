@@ -2835,6 +2835,14 @@ MonoBehaviour:
   cardsPrefabs:
   - {fileID: 3085129681120615660, guid: 37f155cdebeac43a8b766566e244122e, type: 3}
   - {fileID: 5839951490309430751, guid: 33161e5e323a6498f8a1d5b837e60eeb, type: 3}
+  - {fileID: 5839951490309430751, guid: 990cf9dcc9a7b4138885b065bd9bfdfa, type: 3}
+  - {fileID: 5839951490309430751, guid: 7ebd9144f827f48b892d1a48e56fe496, type: 3}
+  - {fileID: 5839951490309430751, guid: 1e62197624f644a1aa9093e6799554f0, type: 3}
+  - {fileID: 5839951490309430751, guid: cea16fe1a4e5d41a5a01624e7c5ab535, type: 3}
+  - {fileID: 5839951490309430751, guid: 6b55ec83aefd04ab5a51c722d3c7ffe3, type: 3}
+  - {fileID: 5839951490309430751, guid: a1c68613f8b7945fdb77a4d8dd87f347, type: 3}
+  - {fileID: 5839951490309430751, guid: 4f6edaf73a5ba4e6eab39685063bf530, type: 3}
+  - {fileID: 5839951490309430751, guid: 00406e9edd64740aba5816ad0b736e82, type: 3}
   loadLevelSetup: {fileID: 1883934773}
 --- !u!114 &1883934773
 MonoBehaviour:
@@ -2855,6 +2863,12 @@ MonoBehaviour:
   - {fileID: 5839951490309430751, guid: 33161e5e323a6498f8a1d5b837e60eeb, type: 3}
   - {fileID: 5839951490309430751, guid: 990cf9dcc9a7b4138885b065bd9bfdfa, type: 3}
   - {fileID: 5839951490309430751, guid: 7ebd9144f827f48b892d1a48e56fe496, type: 3}
+  - {fileID: 5839951490309430751, guid: 1e62197624f644a1aa9093e6799554f0, type: 3}
+  - {fileID: 5839951490309430751, guid: cea16fe1a4e5d41a5a01624e7c5ab535, type: 3}
+  - {fileID: 5839951490309430751, guid: 6b55ec83aefd04ab5a51c722d3c7ffe3, type: 3}
+  - {fileID: 5839951490309430751, guid: a1c68613f8b7945fdb77a4d8dd87f347, type: 3}
+  - {fileID: 5839951490309430751, guid: 4f6edaf73a5ba4e6eab39685063bf530, type: 3}
+  - {fileID: 5839951490309430751, guid: 00406e9edd64740aba5816ad0b736e82, type: 3}
   gameCardMatchChecker: {fileID: 1341459918}
 --- !u!114 &1883934774
 MonoBehaviour:
