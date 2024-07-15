@@ -1,4 +1,5 @@
 using System;
+using TwinMemoryPuzzle.Scripts.GameData;
 using TwinMemoryPuzzle.Scripts.Logic;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ namespace TwinMemoryPuzzle.Scripts.Score
         public Action<int> OnScoresUpdated;
         public Action<int> OnMatchUpdated;
         public Action<int> OnTurnsUpdated;
+        
         void Start()
         {
             scoreUpdater = GetComponent<ScoreUpdater>();
@@ -38,36 +40,62 @@ namespace TwinMemoryPuzzle.Scripts.Score
             gameCardMatchChecker.OnMatchComplete += MatchUpdater;
             gameCardMatchChecker.OnTurnUpdate += TurnUpdate;
 
-            scoreUpdater.OnUpdate += GetUpdateScore;
-            matchUpdater.OnUpdate += GetUpdateMatchScore;
-            turnUpdater.OnUpdate  += GetUpdateTurnScore;
+            scoreUpdater.OnUpdate += SetUpdateScore;
+            matchUpdater.OnUpdate += SetUpdateMatchScore;
+            turnUpdater.OnUpdate  += SetUpdateTurnScore;
+            GameCardSaveLoadData.instance.OnGameSavedDataEventHandler += HandleGameSaved;
         }
-
-        private void GetUpdateTurnScore()
+        private void SetUpdateTurnScore()
         {
              Debug.Log($"turn : {turnUpdater.Point} ");  
              OnTurnsUpdated?.Invoke(turnUpdater.Point);
         }
-        private void GetUpdateMatchScore()
+        private void SetUpdateMatchScore()
         {
             Debug.Log($"match : {matchUpdater.Point} ");  
             OnMatchUpdated?.Invoke(matchUpdater.Point);
         }
-        private void GetUpdateScore()
+        private void SetUpdateScore()
         {
             Debug.Log($"score : {scoreUpdater.Point} ");  
             OnScoresUpdated?.Invoke(scoreUpdater.Point);
+        }
+        private void HandleGameSaved(object _sender, SaveGameEventArgs _e)
+        {
+            _e.GameSavedData.Score = scoreUpdater.Point;
+            _e.GameSavedData.TurnScore = turnUpdater.Point;
+            _e.GameSavedData.MatchScore = matchUpdater.Point;
+        }
+
+        private void OnDestroy()
+        {
+            gameCardMatchChecker.OnScoreUpdate -= ScoreUpdater;
+            gameCardMatchChecker.OnMatchComplete -= MatchUpdater;
+            gameCardMatchChecker.OnTurnUpdate -= TurnUpdate;
+
+            scoreUpdater.OnUpdate -= SetUpdateScore;
+            matchUpdater.OnUpdate -= SetUpdateMatchScore;
+            turnUpdater.OnUpdate  -= SetUpdateTurnScore;
+            GameCardSaveLoadData.instance.OnGameSavedDataEventHandler -= HandleGameSaved;
         }
 
         private void ScoreUpdater() => scoreUpdater.UpdatePoint(scoreIncrement);
         private void TurnUpdate() => turnUpdater.UpdatePoint(turnIncrement);
         private void MatchUpdater() => matchUpdater.UpdatePoint(matchIncrement);
+        public ScoreUpdater ScoreUpdate
+        {
+            get => scoreUpdater;
+            set => scoreUpdater = value;
+        }
+        public TurnUpdater TurnScoreUpdater
+        {
+            get => turnUpdater;
+            set => turnUpdater = value;
+        }
+        public MatchUpdater MatchScoreUpdater
+        {
+            get => matchUpdater;
+            set => matchUpdater = value;
+        }
     }
-
-    
-    
-    
-    
-    
-    
 }

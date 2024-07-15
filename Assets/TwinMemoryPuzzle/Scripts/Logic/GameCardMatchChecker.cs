@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using TwinMemoryPuzzle.Scripts.Level;
+using TwinMemoryPuzzle.Scripts.Score;
 using TwinMemoryPuzzle.Scripts.State;
 using TwinMemoryPuzzle.Utility;
 using UnityEngine;
@@ -26,6 +28,8 @@ namespace TwinMemoryPuzzle.Scripts.Logic
     public class GameCardMatchChecker : MonoBehaviour, ICardObserver
     {
         [SerializeField] private LevelSetup levelSetup;
+        [SerializeField] private LoadLevelSetup loadLevelSetup;
+        [SerializeField] private GameScore gameScore; 
         
         private List<Card.Card> selectedCards  = new List<Card.Card>();
         public event CardSelected OnCardSelected;
@@ -43,6 +47,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
         {
             if (state is GamePreState)
             {
+                Debug.Log("Ready " + levelSetup.GetCardsInScene().Count);
                 foreach (Card.Card card in levelSetup.GetCardsInScene())
                 {
                     card.RegisterCardObserver(this);
@@ -84,10 +89,12 @@ namespace TwinMemoryPuzzle.Scripts.Logic
                 OnMatchComplete?.Invoke();
                 OnScoreUpdate?.Invoke();
                 DelayedInvoker.InvokeAfterDelay(.25f, () => {
-                    selectedCards[0].HideCard();
-                    selectedCards[1].HideCard();
+                    selectedCards[0].MatchComplete();
+                    selectedCards[1].MatchComplete();
                     selectedCards.Clear();
                 });
+                //Check Complete Game
+                CheckCompleteGame();
             }
             else
             {
@@ -101,9 +108,35 @@ namespace TwinMemoryPuzzle.Scripts.Logic
             }
         }
 
+        private void CheckCompleteGame()
+        {
+            if (GameMode.CurrentGameMode == GameMode.StartGameMode.NewGame)
+            {
+                int allMatchComplete = ((levelSetup.Rows) * (levelSetup.Cols))/2;
+                if (gameScore.MatchScoreUpdater.Point >= allMatchComplete)
+                {
+                    GameState.instance.SetState(new GameCompleteState());
+                }
+            }
+            else if (GameMode.CurrentGameMode == GameMode.StartGameMode.LoadGame)
+            {
+                int allMatchComplete = ((loadLevelSetup.Rows) * (loadLevelSetup.Cols))/2;
+                if (gameScore.MatchScoreUpdater.Point >= allMatchComplete)
+                {
+                    GameState.instance.SetState(new GameCompleteState());
+                }
+            }
+        }
+
         void OnDestroy()
         {
             GameEventState.Instance.OnStateChanged -= HandleOnStateChanged;
+        }
+        
+        public List<Card.Card> SelectedCards
+        {
+            get => selectedCards;
+            set => selectedCards = value;
         }
     }
 }
