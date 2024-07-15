@@ -69,18 +69,33 @@ namespace TwinMemoryPuzzle.Scripts.Score
 
         private void OnDestroy()
         {
+            gameCardMatchChecker.OnScoreUpdate -= ScoreUpdater;
+            gameCardMatchChecker.OnMatchComplete -= MatchUpdater;
+            gameCardMatchChecker.OnTurnUpdate -= TurnUpdate;
+
+            scoreUpdater.OnUpdate -= GetUpdateScore;
+            matchUpdater.OnUpdate -= GetUpdateMatchScore;
+            turnUpdater.OnUpdate  -= GetUpdateTurnScore;
             GameCardSaveLoadData.instance.OnGameSavedDataEventHandler -= HandleGameSaved;
         }
 
         private void ScoreUpdater() => scoreUpdater.UpdatePoint(scoreIncrement);
         private void TurnUpdate() => turnUpdater.UpdatePoint(turnIncrement);
         private void MatchUpdater() => matchUpdater.UpdatePoint(matchIncrement);
+        public ScoreUpdater ScoreUpdate
+        {
+            get => scoreUpdater;
+            set => scoreUpdater = value;
+        }
+        public TurnUpdater TurnScoreUpdater
+        {
+            get => turnUpdater;
+            set => turnUpdater = value;
+        }
+        public MatchUpdater MatchScoreUpdater
+        {
+            get => matchUpdater;
+            set => matchUpdater = value;
+        }
     }
-
-    
-    
-    
-    
-    
-    
 }

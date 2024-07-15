@@ -12,12 +12,14 @@ namespace TwinMemoryPuzzle.Scripts.GameData
         public GameData GameSavedData { get; set; }
         // public string FilePath { get; set; }
     }
-
+    public delegate void OnLoadGame(GameData _gameData);
     public class GameCardSaveLoadData : MonoBehaviour
     {
         public event EventHandler<SaveGameEventArgs> OnGameSavedDataEventHandler;
 
         public static GameCardSaveLoadData instance;
+        
+        public event OnLoadGame OnLoadGameUpdate;
         private void Awake()
         {
             instance = this;
@@ -39,34 +41,7 @@ namespace TwinMemoryPuzzle.Scripts.GameData
             
             SavePath(gameData,GlobalConstant.FILE_SAVE_GAME_NAME);
         }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                SaveGame(new GameData());
-            }
-
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                GameData loadGameData = LoadGame(GlobalConstant.FILE_SAVE_GAME_NAME);
-                Debug.Log("SceneName : " + loadGameData.CurrentLevelIndex);
-                Debug.Log("Row : " + loadGameData.RowGridLayout);
-                Debug.Log("Col : " + loadGameData.ColGridLayout);
-                Debug.Log("Cards : " + loadGameData.CardDatas.Count);
-                Debug.Log("Score : " + loadGameData.Score);
-                Debug.Log("Match : " + loadGameData.MatchScore);
-                Debug.Log("Turn : " + loadGameData.TurnScore);
-
-                for (int i = 0; i < loadGameData.CardDatas.Count; i++)
-                {
-                    Debug.Log("ID : " + loadGameData.CardDatas[i].ID);
-                    Debug.Log("IsShow : " + loadGameData.CardDatas[i].IsShow);
-                    Debug.Log("IsMatch : " + loadGameData.CardDatas[i].IsMatch);
-                }
-            }
-        }
-
+        
         public void SaveGame(GameData gameData)
         {
             OnGameSaved(new SaveGameEventArgs {GameSavedData = gameData});
@@ -105,7 +80,7 @@ namespace TwinMemoryPuzzle.Scripts.GameData
 
             string json = File.ReadAllText(path);
             GameData loadedData = JsonUtility.FromJson<GameData>(json);
-
+            OnLoadGameUpdate?.Invoke(loadedData);
             return loadedData;
         }
     }

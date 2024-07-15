@@ -7,8 +7,10 @@ using TwinMemoryPuzzle.Scripts.Random;
 using TwinMemoryPuzzle.Scripts.State;
 using UnityEngine;
 
+
 namespace TwinMemoryPuzzle.Scripts.Level
 {
+    
     public class LoadLevelSetup : MonoBehaviour
     {
         [SerializeField] private LevelSetup levelSetup;

@@ -63,12 +63,7 @@ namespace TwinMemoryPuzzle.Scripts.Logic
             Debug.Log($"card id {card.ID}");
             CardWasSelected(card);
         }
-
-        private void Update()
-        {
-            Debug.Log($"Card Was Select : {selectedCards.Count}");
-        }
-
+        
         private void CardWasSelected(Card.Card selectedCard)
         {
             if(selectedCards.Count > 2) return;
