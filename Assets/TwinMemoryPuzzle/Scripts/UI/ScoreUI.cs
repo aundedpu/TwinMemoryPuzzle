@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 namespace TwinMemoryPuzzle.Scripts.UI
 {
+    [RequireComponent(typeof(ScoreAnimatorUpdate))]
     public class ScoreUI : MonoBehaviour
     {
         [SerializeField] private GameScore gameScore;
+        [SerializeField] private ScoreAnimatorUpdate scoreAnimatorUpdate;
         [SerializeField] private Text scoreText;  
         [SerializeField] private Text matchText; 
         [SerializeField] private Text turnText;
-
         void Awake()
         {
             GameCardSaveLoadData.instance.OnLoadGameUpdate += LoadScoreData;
@@ -20,10 +21,18 @@ namespace TwinMemoryPuzzle.Scripts.UI
 
         void Start()
         {
-            gameScore.OnScoresUpdated += UpdateScoreTextUi;
+            scoreAnimatorUpdate = GetComponent<ScoreAnimatorUpdate>();
+            // gameScore.OnScoresUpdated += UpdateScoreTextUi;
+            gameScore.ScoreUpdate.OnScoresAnimatorUpdated += UpdateScoreTextUi;
             gameScore.OnTurnsUpdated += UpdateTurnTextUi;
             gameScore.OnMatchUpdated += UpdateMatchTextUi;
         }
+
+        private void UpdateScoreTextUi(int oldScore, int newScore)
+        {
+            scoreAnimatorUpdate.AnimateScore(oldScore,newScore,scoreText);
+        }
+
         private void UpdateMatchTextUi(int score)
         {
             if(matchText)

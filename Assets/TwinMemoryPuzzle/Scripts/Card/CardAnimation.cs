@@ -22,5 +22,11 @@ namespace TwinMemoryPuzzle.Scripts.Card
             cardAnimator.Play("Close");  
         }
 
+        public Animator CardAnimator
+        {
+            get => cardAnimator;
+            set => cardAnimator = value;
+        }
+
     }
 }

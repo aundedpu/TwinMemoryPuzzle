@@ -10,7 +10,6 @@ namespace TwinMemoryPuzzle.Scripts.Score
             Point += value;
             UpdatePoint();
         }
-        
         public void UpdatePoint()
         {
             OnUpdate?.Invoke();

@@ -2282,6 +2282,7 @@ GameObject:
   - component: {fileID: 1737140456}
   - component: {fileID: 1737140457}
   - component: {fileID: 1737140458}
+  - component: {fileID: 1737140459}
   m_Layer: 0
   m_Name: GameUI
   m_TagString: Untagged
@@ -2317,6 +2318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScore: {fileID: 877170446}
+  scoreAnimatorUpdate: {fileID: 0}
   scoreText: {fileID: 941741950}
   matchText: {fileID: 358234251}
   turnText: {fileID: 205397369}
@@ -2333,6 +2335,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupImage: {fileID: 748707341}
+--- !u!114 &1737140459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737140455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbf5416bd7ca494daebdee00ffb139e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationTime: 0.25
 --- !u!1 &1757859325
 GameObject:
   m_ObjectHideFlags: 0

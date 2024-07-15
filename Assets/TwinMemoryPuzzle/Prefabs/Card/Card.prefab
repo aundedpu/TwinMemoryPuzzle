@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 213026933842030979}
   - component: {fileID: 7504514777882271064}
   - component: {fileID: 4112852745330520705}
+  - component: {fileID: 715186773206197981}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -96,6 +97,7 @@ MonoBehaviour:
   cardGoPrefabs: {fileID: 3240221677427211877}
   hideCardBackground: {fileID: 6386928041629475678}
   id: 0
+  cardAnimation: {fileID: 715186773206197981}
 --- !u!95 &4112852745330520705
 Animator:
   serializedVersion: 5
@@ -117,6 +119,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &715186773206197981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240221677427211877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4825db8ab1c4b425ab6aa551f2c7ad60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardAnimator: {fileID: 4112852745330520705}
 --- !u!1 &5488138231629321376
 GameObject:
   m_ObjectHideFlags: 0

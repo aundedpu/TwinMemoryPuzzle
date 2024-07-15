@@ -34,7 +34,7 @@ namespace TwinMemoryPuzzle.Scripts.Card
         private List<ICardObserver> _observers = new List<ICardObserver>();
         private List<ICardObserver> cardObservers = new List<ICardObserver>();
 
-        private CardAnimation cardAnimation;
+        [SerializeField] private CardAnimation cardAnimation;
 
         void Start()
         {
@@ -69,22 +69,42 @@ namespace TwinMemoryPuzzle.Scripts.Card
                 return;
             IsShow = true;
             NotifyCardObserversOfAction();
-            // hideCardBackground.SetActive(false);
-            cardAnimation.Show();
+            cardAnimation.CardAnimator.enabled = true;
+            if(cardAnimation)
+                cardAnimation.Show();
+            else
+                hideCardBackground.SetActive(false);
         }
 
         public void CloseCard()
         {
+            cardAnimation.CardAnimator.enabled = true;
             IsShow = false;
-            // hideCardBackground.SetActive(true);
-            cardAnimation.Hide();
+            if (cardAnimation)
+            { 
+                cardAnimation.Hide();
+            }
+        }
+
+        public void ForceCloseCard()
+        {
+            cardAnimation.CardAnimator.enabled = false;
+            hideCardBackground.SetActive(true);
+            DelayedInvoker.InvokeAfterDelay(.25f, () => {
+                // cardAnimation.CardAnimator.enabled = true;
+            });
+        }
+        
+        public void ForceHideCard()
+        {
+            gameObject.SetActive(false);
         }
         
         public void HideCard()
         {
-            DelayedInvoker.InvokeAfterDelay(.25f, () => {
-                gameObject.SetActive(false);
-            });
+                DelayedInvoker.InvokeAfterDelay(.25f, () => {
+                    gameObject.SetActive(false);
+                });
         }
 
         public void MatchComplete()
