@@ -1,4 +1,4 @@
-# Twin Memory puzzle
+# Twin Memory Puzzle
 
 ## Description
 
@@ -40,9 +40,9 @@ aunzamayo1992@gmail.com
 
 ---
 ## Download
-[Andorid Download](https://drive.google.com/file/d/1O_UrPLNEkMjIuCx9x1p1MqQx7NdWePxj/view?usp=sharing)
+[Andorid Download](https://drive.google.com/file/d/14lscqH5cKrV--cK914TVF14V3SixBSdq/view?usp=sharing)
 
-[Standalone Download](https://drive.google.com/file/d/1-QoF2PrpI32cKB83J3gn5rP_ph2CF5em/view?usp=sharing)
+[Standalone Download](https://drive.google.com/file/d/1pNxthccPa8UvNsGb1XwbUF0vPax9QVjF/view?usp=sharing)
 
 
 
